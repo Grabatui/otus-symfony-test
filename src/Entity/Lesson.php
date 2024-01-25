@@ -4,7 +4,19 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class Lisson
-{
+use App\Repository\LessonRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity(repositoryClass: LessonRepository::class)]
+class Lesson
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    public int $id;
+
+    /** @var Collection<Task> */
+    #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: Task::class, fetch: 'EAGER')]
+    public Collection $tasks;
 }
