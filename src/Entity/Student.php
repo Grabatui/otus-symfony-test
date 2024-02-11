@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,6 +18,11 @@ class Student
     public int $id;
 
     /** @var Collection<StudentGroup> */
-    #[Orm\ManyToMany(targetEntity: StudentGroup::class, inversedBy: 'students')]
+    #[Orm\ManyToMany(targetEntity: StudentGroup::class, mappedBy: 'students')]
     public Collection $studentGroups;
+
+    public function __construct()
+    {
+        $this->studentGroups = new ArrayCollection();
+    }
 }
