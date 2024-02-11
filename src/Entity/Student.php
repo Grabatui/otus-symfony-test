@@ -18,7 +18,7 @@ class Student
     public int $id;
 
     /** @var Collection<StudentGroup> */
-    #[Orm\ManyToMany(targetEntity: StudentGroup::class, mappedBy: 'students')]
+    #[Orm\ManyToMany(targetEntity: StudentGroup::class, mappedBy: 'students', fetch: 'EAGER')]
     public Collection $studentGroups;
 
     public function __construct()

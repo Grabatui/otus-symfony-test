@@ -21,8 +21,13 @@ class Lesson
     #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: Task::class, fetch: 'EAGER')]
     public Collection $tasks;
 
+    /** @var Collection<LessonRevision> */
+    #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: LessonRevision::class)]
+    public Collection $lessonRevisions;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->lessonRevisions = new ArrayCollection();
     }
 }

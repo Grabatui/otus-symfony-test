@@ -31,7 +31,16 @@ class StudentGroup
     public Collection $students;
 
     /** @var Collection<LessonRevision> */
-    #[Orm\ManyToMany(targetEntity: LessonRevision::class)]
+    #[Orm\ManyToMany(targetEntity: LessonRevision::class, inversedBy: 'studentGroups')]
+    #[ORM\JoinTable(
+        name: 'student_group_lesson_revision',
+        joinColumns: [
+            new ORM\JoinColumn(name: 'student_group_id', referencedColumnName: 'id'),
+        ],
+        inverseJoinColumns: [
+            new ORM\JoinColumn(name: 'lesson_revision_id', referencedColumnName: 'id'),
+        ]
+    )]
     public Collection $lessonRevisions;
 
     public function __construct()
